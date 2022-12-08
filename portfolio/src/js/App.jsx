@@ -4,6 +4,11 @@ import coding from '../assets/images/coding.jpg';
 import gaming from '../assets/images/gaming.jpg';
 import cooking from '../assets/images/cooking.jpg';
 import biking from '../assets/images/biking.jpg';
+import adidas from '../assets/images/adidas_logo.png';
+import netflix from '../assets/images/netflix.webp';
+import checkout from '../assets/images/checkout.jpg';
+import eddie from '../assets/images/eddie.jpg';
+import recipe from '../assets/images/recipe.jpg';
 
 const Header = () => {
   return (
@@ -81,18 +86,43 @@ const Main = () => {
   const Hobby = ({ image, activity, desc }) => {
     return (
       <div className="flex flex-col gap-2">
-        <Image image={image} className="w-full rounded-2xl" />
+        <Image
+          image={image}
+          className="w-full rounded-2xl md:h-[9rem] h-[8rem] lg:h-[11rem]"
+        />
         <Paragraph
           text={activity}
-          className=" font-semibold text-lg capitalize"
+          className="font-semibold text-lg capitalize"
         />
-        <Paragraph text={desc} className=" text-gray3 font-quantico" />
+        <Paragraph text={desc} className="text-gray3 font-quantico" />
+      </div>
+    );
+  };
+  const Experience = ({ image, date, skill_level, desc }) => {
+    return (
+      <div className="flex justify-between items-start gap-4">
+        <Image
+          image={image}
+          alt="experiences"
+          className={
+            'w-[8rem] md:w-[6rem] max-w-full h-[80%] md:h-[60%] lg:w-[8rem] lg:h-[80%] '
+          }
+        />
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <Paragraph text={date} className={'text-sm text-gray3'} />
+            <Paragraph text={skill_level} className=" font-bold" />
+          </div>
+          <div className="text-gray3">
+            <Paragraph text={desc} className={'gray-2 text-sm lg:text-base'} />
+          </div>
+        </div>
       </div>
     );
   };
   return (
     <article className="flex flex-col md:flex-row gap-6 md:gap-8 rounded-xl ">
-      <section className="flex flex-col gap-6 place-self-start lg:flex-[0.5] md:flex-[0.8]">
+      <section className="flex flex-col gap-6 place-self-start lg:flex-[0.5] md:flex-[0.8] w-full md:w-auto">
         {/* Front end */}
         <div className="bg-white p-4 rounded-2xl">
           <Paragraph
@@ -124,7 +154,7 @@ const Main = () => {
           />
         </div>
       </section>
-      <section className="flex lg:w-10/12 md:flex-1">
+      <section className="flex lg:w-10/12 md:flex-1 flex-col gap-6">
         {/* blog */}
         <div className="bg-white flex flex-col rounded-2xl p-4 w-fit h-fit gap-4">
           <Paragraph text={'Blog'} className=" text-gray4" />
@@ -167,8 +197,87 @@ const Main = () => {
           />
         </div>
         {/* Experiences */}
+        <div className="bg-white flex flex-col gap-4 md:gap-0 items-start p-4 rounded-2xl h-full">
+          <Paragraph
+            text={'Experiences'}
+            className="uppercase font-bold text-xl"
+          />
+          <div className="flex flex-col h-full justify-around gap-6 md:gap-0">
+            <Experience
+              image={adidas}
+              date={'Feb 2022 - Current'}
+              skill_level={'Front-end developer'}
+              desc={`Donec aliquam est dui, vel vestibulum diam sollicitudin id. Quisque feugiat malesuada`}
+            />
+            <Experience
+              image={netflix}
+              date={'Aug 2016 - Feb 2018'}
+              skill_level={'Full-stack developer'}
+              desc={`Donec aliquam est dui, vel vestibulum diam sollicitudin id. Quisque feugiat malesuada`}
+            />
+          </div>
+        </div>
       </section>
     </article>
+  );
+};
+
+const skills = ['React', 'Vue', 'Responsive'];
+
+const Nav = () => {
+  const ListLanguages = () =>
+    skills.map((skill) => {
+      return (
+        <li key={skill}>
+          <button className="outline outline-1 hover:bg-sky-500 hover:text-white py-2 px-4 text-xl rounded-xl">
+            {skill}
+          </button>
+        </li>
+      );
+    });
+  return (
+    <section className="bg-white rounded-2xl p-4 flex flex-col gap-4">
+      <Paragraph
+        text={`Projects (${skills.length})`}
+        className="text-xl lg:text-2xl font-normal"
+      />
+      <ul className="flex gap-4">
+        <ListLanguages />
+      </ul>
+    </section>
+  );
+};
+
+const Footer = ({ image, hashtags, title, desc, demo, code }) => {
+  const ModifiedLinks = () => hashtags.map((tag) => <li key={tag}>#{tag}</li>);
+
+  return (
+    <div className="flex flex-col p-4 bg-white w-fit gap-4">
+      <Image
+        image={image}
+        alt="image"
+        className={'w-3/5 self-center rounded-2xl'}
+      />
+      <div className="flex flex-col gap-4">
+        <ul className="flex gap-2 uppercase">
+          <ModifiedLinks />
+        </ul>
+        <Paragraph text={title} className={'text-xl font-bold'} />
+        <Paragraph text={desc} />
+        <div className="flex gap-4">
+          <Link
+            className=" cursor-pointer rounded-xl outline outline-1 outline-sky-500 hover:bg-sky-500 hover:text-white bg-white py-2 px-4"
+            text={'Demo'}
+            href={demo}
+          />
+          <Link
+            className="rounded-xl outline outline-1 outline-sky-500 hover:bg-sky-500 bg-white py-2 px-4 cursor-pointer hover:text-white"
+            text={'Code'}
+            href={code}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -177,6 +286,39 @@ export default function App() {
     <main className="font-quicksand my-2 mx-4 md:mx-8 lg:mx-24 2xl:mx-32 text-gray1 flex flex-col gap-6">
       <Header />
       <Main />
+      <Nav />
+      <footer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
+        <Footer
+          image={checkout}
+          hashtags={['html', 'css', 'responsive']}
+          title={'Checkout'}
+          desc={`In this project, I work with HTML and CSS to create a responsive page. This page is similiar with a page. The design is from devchallenge.io`}
+          demo={'https://zerebel.github.io/checkout-page/'}
+          code={'https://github.com/Zerebel/checkout-page'}
+        />
+
+        <Footer
+          image={recipe}
+          hashtags={['html', 'css', 'responsive']}
+          title={'Recipe Blog'}
+          desc={`In this project, I work with HTML and CSS to create a responsive page. This page is similiar with a page. The design is from devchallenge.io`}
+          demo={'https://zerebel.github.io/recipe-blog/'}
+          code={'https://github.com/Zerebel/recipe-blog'}
+        />
+        <Footer
+          image={eddie}
+          hashtags={['html', 'css', 'responsive']}
+          title={'Eddie Homepage'}
+          desc={`In this project, I work with HTML and CSS to create a responsive page. This page is similiar with a page. The design is from devchallenge.io`}
+          demo={'https://zerebel.github.io/eddie-homepage/'}
+          code={'https://github.com/Zerebel/eddie-homepage'}
+        />
+      </footer>
+      <Link
+        href={'https://github.com/Zerebel'}
+        text={'created by Zerebel - devChallenges.io'}
+        className={'text-center text-gray3'}
+      />
     </main>
   );
 }
