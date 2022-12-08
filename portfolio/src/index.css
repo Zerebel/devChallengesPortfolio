@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+progress::-webkit-progress-bar {
+  appearance: none;
+  @apply bg-slate-300;
+  @apply rounded-2xl;
+}
+progress::-webkit-progress-bar {
+  appearance: none;
+}
+progress::-webkit-progress-value {
+  appearance: none;
+}
+progress::-moz-progress-bar {
+  appearance: none;
+}

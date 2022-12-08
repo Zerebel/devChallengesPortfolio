@@ -8,4 +8,8 @@ export const Paragraph = ({ text, className }) => (
   <p className={className}>{text}</p>
 );
 
-export const Link = ({ href, text }) => <a href={href}>{text}</a>;
+export const Link = ({ href, text, className }) => (
+  <a href={href} className={className}>
+    {text}
+  </a>
+);
